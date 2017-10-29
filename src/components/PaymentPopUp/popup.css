@@ -1,8 +1,8 @@
 .popup-btn {
+	position: absolute;
 	display: inline-block;
-	margin-top: 75px;
-	margin-bottom: 12px;
-	margin-left: 130px;
+	right: 10%;
+	bottom: 45px;
 }
 
 .popup-stepper {
@@ -11,5 +11,13 @@
 }
 
 .popup-main {
-	line-height: 50px;
+	line-height: 40px;
+}
+
+.popup-btns {
+	margin-top: 20px;
+}
+
+.popup-textfield {
+	width: 30px;
 }

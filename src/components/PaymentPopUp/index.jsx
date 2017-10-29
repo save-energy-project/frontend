@@ -3,6 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon'
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import {
   Step,
   Stepper,
@@ -13,25 +14,37 @@ import ArrowForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 import './popup.css';
 
 export default class PaymentPopUp extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
       dialog: this.props.dialog,
-      stepIndex: 0
+      stepIndex: 0,
+      price: "", 
+      currency: "",
+      amount: ""
     }
-    this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
   }
+
   componentWillReceiveProps (nextProps) {
     this.setState({ dialog: nextProps.dialog })
   }
 
-  handleNext() {
+  handleNext(currency) {
     const {stepIndex} = this.state;
 
-    if (stepIndex < 2) {
-      this.setState({stepIndex: stepIndex + 1});
+    if (currency=="Finish") {
+      console.log(this.state.amount + " " + this.state.currency);
     }
+
+    if (stepIndex < 1) {
+      this.setState({ stepIndex: stepIndex + 1, currency: currency });
+    } else {
+      this.setState({ dialog: false, stepIndex: 0, currency: "" })
+    }
+
+
   }
 
   handlePrev() {
@@ -49,48 +62,53 @@ export default class PaymentPopUp extends Component {
       case 0:
         return (
           <div className="popup-main">
-            Select your payment method: <br/>
-            <FlatButton
-              className="popup-btn-padding"
-              target="_blank"
-              label="Bitcoin"
-              secondary={true}
-              icon={<FontIcon className="muidocs-icon-custom-github" />}
-            /> <br/>
-            <FlatButton
-              className="popup-btn-padding"
-              target="_blank"
-              label="Ethereum"
-              secondary={true}
-              icon={<FontIcon className="muidocs-icon-custom-github" />}
-            /> <br/>
-            <FlatButton
-              className="popup-btn-padding"
-              target="_blank"
-              label="Litecoin"
-              secondary={true}
-              icon={<FontIcon className="muidocs-icon-custom-github" />}
-            />
+            Select your payment method: <br/> 
+            <div className="popup-btns">
+              <FlatButton
+                target="_blank"
+                label="Bitcoin"
+                secondary={true}
+                onClick={this.handleNext.bind(this, "Bitcoin")}
+                icon={<FontIcon className="muidocs-icon-custom-github" />}
+              /> <br/>
+              <FlatButton
+                target="_blank"
+                label="Ethereum"
+                secondary={true}
+                onClick={this.handleNext.bind(this, "Ethereum")}
+                icon={<FontIcon className="muidocs-icon-custom-github" />}
+              /> <br/>
+              <FlatButton
+                target="_blank"
+                label="Litecoin"
+                secondary={true}
+                onClick={this.handleNext.bind(this, "Litecoin")}
+                icon={<FontIcon className="muidocs-icon-custom-github" />}
+              />
+            </div>
           </div>
         );
 
       case 1:
         return (
-          <p>
-            {'An ad group contains one or more ads which target a shared set of keywords.'}
-          </p>
-        );
+          <div>
+            Select your amount: <br/> <br/>
 
-      case 2:
-        return (
-          <p>
-            {'Try out different ad text to see what brings in the most customers, and learn ' +
-            'how to enhance your ads using features like ad extensions. If you run into any ' +
-            'problems with your ads, find out how to tell if they\'re running and how to ' +
-            'resolve approval issues.'}
-          </p>
+            <TextField
+              hintText={
+                this.state.amount == "" ? "Insert Amount Here" : ""} 
+                value={this.state.ammount} 
+                onChange={this.handleAmountChange.bind(this)}
+            />
+            {" " + this.state.currency}
+
+          </div>
         );
     }
+  }
+
+  handleAmountChange(e) {
+    this.setState( {amount: e.target.value} );
   }
 
   render () {
@@ -100,20 +118,15 @@ export default class PaymentPopUp extends Component {
       <Dialog
         open={this.state.dialog}
       >          
-
-
-        {this.getStepContent(stepIndex)}
-
+        {this.getStepContent(stepIndex)} <br/>
         <div className="popup-stepper">
           <Stepper activeStep={stepIndex} connector={<ArrowForwardIcon />}>
             <Step>
               <StepLabel>Payment Method</StepLabel>
             </Step>
-
             <Step>
               <StepLabel>Finalize</StepLabel>
             </Step>
-
           </Stepper>
         </div>
 
@@ -123,17 +136,16 @@ export default class PaymentPopUp extends Component {
             onClick={this.handlePrev}
             style={{marginRight: 12}}
           />
-          <RaisedButton
-            label={stepIndex === 2 ? 'Finish' : 'Next'}
+          {stepIndex === 1 ?           
+            <RaisedButton
+            label={'Pay'}
             primary={true}
-            onClick={this.handleNext}
-          />
+            onClick={this.handleNext.bind(this, "Finish")}
+            /> : null
+          }
         </div>
-
-
-
-
       </Dialog>
     );
   }
+  
 }
