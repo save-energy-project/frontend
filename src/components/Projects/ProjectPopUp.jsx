@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -92,7 +93,11 @@ export default class ProjectPopUp extends Component {
           </IconButton>
         </div>
 
-        <h2>{item.title}</h2>
+        <h2 style={{ display: 'inline-block', padding: '8px' }}>{item.title}</h2>
+        <RaisedButton
+          label="Donate"
+          primary={true}
+        />
         <p>{item.description}</p>
         <div className="progress">
           <div style={{ display: 'inline-block', paddingRight: '8px' }}> {item.current} </div>
@@ -109,12 +114,16 @@ export default class ProjectPopUp extends Component {
           />
           <div style={{ display: 'inline-block', paddingLeft: '8px' }}> {item.goal} </div>
         </div>
-        <br/>
-
+        <br />
         <br />
         {this.createCarousel()}
         <br/>
         <br/>
+        <RaisedButton
+          label="Donate"
+          fullWidth={true}
+          primary={true}
+        />
       </Dialog>
     );
   }
