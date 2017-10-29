@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Bitcoin from './../../images/logo.svg';
+import SvgIcon from 'material-ui/SvgIcon';
 import {
   Step,
   Stepper,
@@ -34,7 +35,7 @@ export default class PaymentPopUp extends Component {
   handleNext(currency) {
     const {stepIndex} = this.state;
 
-    if (currency=="Finish") {
+    if (currency === "Finish") {
       console.log(this.state.amount + " " + this.state.currency);
     }
 
@@ -49,7 +50,7 @@ export default class PaymentPopUp extends Component {
 
   handlePrev() {
     const {stepIndex} = this.state;
-
+    this.state.amount=""
     if (stepIndex > 0) {
       this.setState({stepIndex: stepIndex - 1});
     } else {
@@ -60,6 +61,18 @@ export default class PaymentPopUp extends Component {
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
+        const BitcoinIcon = (props) => (
+          <SvgIcon {...props}>
+          </SvgIcon>
+        );
+        const EtherIcon = (props) => (
+          <SvgIcon {...props}>
+          </SvgIcon>
+        );
+        const LitecoinIcon = (props) => (
+          <SvgIcon {...props}>
+          </SvgIcon>
+        );
         return (
           <div className="popup-main">
             Select your payment method: <br/> 
@@ -69,39 +82,53 @@ export default class PaymentPopUp extends Component {
                 label="Bitcoin"
                 secondary={true}
                 onClick={this.handleNext.bind(this, "Bitcoin")}
-                icon={<FontIcon className="muidocs-icon-custom-github" />}
+                // icon={<BitcoinIcon />}
               /> <br/>
               <FlatButton
                 target="_blank"
                 label="Ethereum"
                 secondary={true}
-                onClick={this.handleNext.bind(this, "Ethereum")}
-                icon={<FontIcon className="muidocs-icon-custom-github" />}
+                onClick={this.handleNext.bind(this, "Ether")}
+                // icon={<EtherIcon />}
               /> <br/>
               <FlatButton
                 target="_blank"
                 label="Litecoin"
                 secondary={true}
                 onClick={this.handleNext.bind(this, "Litecoin")}
-                icon={<FontIcon className="muidocs-icon-custom-github" />}
+                // icon={<LitecoinIcon />}
               />
             </div>
           </div>
         );
 
       case 1:
+        var currencyConverter = {};
+        currencyConverter["Bitcoin"] = 5803.64;
+        currencyConverter["Ether"] = 305.63;
+        currencyConverter["Litecoin"] = 55.04;
         return (
           <div>
-            Select your amount: <br/> <br/>
+
+            Select your amount in crypto or USD: <br/> <br/>
 
             <TextField
-              hintText={
-                this.state.amount == "" ? "Insert Amount Here" : ""} 
-                value={this.state.ammount} 
-                onChange={this.handleAmountChange.bind(this)}
+              floatingLabelText=""
+              hintText={this.state.amount === "" ? "Insert Amount Here" : ""} 
+              value={this.state.ammount} 
+              onChange={this.handleAmountChange.bind(this)}
             />
             {" " + this.state.currency}
+            <br/>
+            {"or"}
+            <br/>
+            {currencyConverter[this.state.currency]*this.state.amount + " USD"}
+          </div>
+        );
 
+      default:
+        return (
+          <div>
           </div>
         );
     }
@@ -113,6 +140,7 @@ export default class PaymentPopUp extends Component {
 
   render () {
     const {stepIndex} = this.state;
+
 
     return (
       <Dialog
@@ -147,5 +175,5 @@ export default class PaymentPopUp extends Component {
       </Dialog>
     );
   }
-  
+
 }
