@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import Routes from '../routes';
 
 import logo from '../images/logo.svg';
 import theme from '../global/material-ui-theme';
@@ -14,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={theme}>
-        <AppBar></AppBar>
+        <Routes />
       </MuiThemeProvider>
     );
   }
