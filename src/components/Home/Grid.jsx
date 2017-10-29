@@ -4,8 +4,9 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import ProjectPopUp from './../Projects/ProjectPopUp';
+import axios from 'axios';
 
-var data = require('./../../data/test.json');
+let check = true;
 
 export default class Grid extends Component {
   constructor (props) {
@@ -13,6 +14,7 @@ export default class Grid extends Component {
     this.state = {
       clickedItem: {},
       dialogStatus: false,
+      data: [],
     }
   }
     onIconClick = (item) => {
@@ -22,6 +24,19 @@ export default class Grid extends Component {
       });
     }
     render () {
+      if (check) {
+      axios.get('http://localhost:8080/api/get_projects')
+        .then((res) => {
+          this.setState({ data: res.data });
+          console.log(res.data);
+          check = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      }
+
+        const { data } = this.state;
       return (
         <div>
           <GridList

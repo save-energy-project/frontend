@@ -11,6 +11,10 @@ import {
   StepLabel,
 } from 'material-ui/Stepper';
 import ArrowForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward';
+import axios from 'axios';
+
+
+var currencyConverter = {};
 
 export default class PaymentPopUp extends Component {
 
@@ -34,7 +38,19 @@ export default class PaymentPopUp extends Component {
     const {stepIndex} = this.state;
 
     if (currency === "Finish") {
-      console.log(this.state.amount + " " + this.state.currency);
+      const payment = currencyConverter[this.state.currency]*this.state.amount;
+      const project_id = this.props.item.project_id;
+      const url = `http://localhost:8080/api/donate?project_id=${project_id}&amount=${payment}&user=13kvMrLfVHurj2s3SrGebt2Csy2um3Fbt1`
+      console.log(url);
+      axios.post(`http://localhost:8080/api/donate?project_id=${project_id}&amount=${payment}&user=-KxcBQXpMt7RL_GjciJW`)
+        .then((res) => {
+          console.log(res);
+          window.location = '/home';
+        })
+        .catch((err) => {
+          console.log(err);
+          window.location = '/home';
+        })
     }
 
     if (stepIndex < 1) {
@@ -101,7 +117,6 @@ export default class PaymentPopUp extends Component {
         );
 
       case 1:
-        var currencyConverter = {};
         currencyConverter["Bitcoin"] = 5803.64;
         currencyConverter["Ether"] = 305.63;
         currencyConverter["Litecoin"] = 55.04;

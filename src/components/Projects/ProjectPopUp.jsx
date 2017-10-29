@@ -107,7 +107,7 @@ export default class ProjectPopUp extends Component {
         />
         <p>{item.description}</p>
         <div className="progress">
-          <div style={{ display: 'inline-block', paddingRight: '8px' }}> {item.current} </div>
+          <div style={{ display: 'inline-block', paddingRight: '8px' }}> {Math.round(item.current * 100) / 100} BTC </div>
           <LinearProgress
             mode="determinate"
             value={parseInt(item.current)}
@@ -119,7 +119,7 @@ export default class ProjectPopUp extends Component {
               display: 'inline-block',
             }}
           />
-          <div style={{ display: 'inline-block', paddingLeft: '8px' }}> {item.goal} </div>
+          <div style={{ display: 'inline-block', paddingLeft: '8px' }}> {item.goal} BTC</div>
         </div>
         <br />
         <br />
@@ -134,6 +134,7 @@ export default class ProjectPopUp extends Component {
         />
         <PaymentPopUp
           dialog={this.state.paymentDialog}
+          item={this.props.item}
         />
       </Dialog>
     );
