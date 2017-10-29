@@ -3,14 +3,14 @@ import AppBar from 'material-ui/AppBar';
 import AutoComplete from 'material-ui/AutoComplete';
 import IconButton from 'material-ui/IconButton';
 
-import 'material-design-icons';
+import logo from '../images/logo.png';
 
 class Home extends Component {
   render () {
     return (
       <div>
         <AppBar
-          title="L O G O"
+          title={<img src={logo} height="60" weight="50" />}
           showMenuIconButton={false}
         >
           <div className='search-bar'>
@@ -26,6 +26,7 @@ class Home extends Component {
             </IconButton>
           </div>
         </AppBar>
+
     </div>
     )
   }
