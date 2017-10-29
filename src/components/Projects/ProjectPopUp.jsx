@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import LinearProgress from 'material-ui/LinearProgress';
 import ImageGallery from 'react-image-gallery';
+import PaymentPopUp from './../PaymentPopUp';
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
@@ -14,6 +15,7 @@ export default class ProjectPopUp extends Component {
     this.state = {
       dialog: this.props.dialog,
       item: this.props.item,
+      paymentDialog: false,
     }
   }
 
@@ -60,6 +62,10 @@ export default class ProjectPopUp extends Component {
     }
   }
 
+  handleDonateClick = () => {
+    this.setState({ paymentDialog: true });
+  }
+
   render () {
     const actions = [
       <FlatButton
@@ -95,8 +101,9 @@ export default class ProjectPopUp extends Component {
 
         <h2 style={{ display: 'inline-block', padding: '8px' }}>{item.title}</h2>
         <RaisedButton
-          label="Donate"
+          label="Invest"
           primary={true}
+          onClick={this.handleDonateClick}
         />
         <p>{item.description}</p>
         <div className="progress">
@@ -120,9 +127,13 @@ export default class ProjectPopUp extends Component {
         <br/>
         <br/>
         <RaisedButton
-          label="Donate"
+          label="Invest"
           fullWidth={true}
           primary={true}
+          onClick={this.handleDonateClick}
+        />
+        <PaymentPopUp
+          dialog={this.state.paymentDialog}
         />
       </Dialog>
     );

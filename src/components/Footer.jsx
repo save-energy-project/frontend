@@ -4,7 +4,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="footer">
-        &copy; 2017 Invest-Synergy, Inc. All Rights Reserved.
+        &copy; 2017 Synergy, Inc. All Rights Reserved.
       </div>
     );
   }
