@@ -3,3 +3,9 @@
   left: 0;
   margin-left: 100px;
 }
+
+.dialog-header {
+  position:absolute;
+  top:0;
+  right:0;
+}

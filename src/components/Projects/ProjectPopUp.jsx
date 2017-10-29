@@ -21,6 +21,10 @@ export default class ProjectPopUp extends Component {
     this.setState({ dialog: false });
   }
 
+  createCarousel = () => {
+    
+  }
+
   render () {
     const actions = [
       <FlatButton
@@ -37,13 +41,21 @@ export default class ProjectPopUp extends Component {
     ];
     return (
       <Dialog
-        actions={actions}
         open={this.state.dialog}
         onRequestClose={() => {
           this.setState({ dialog: false, })
         }}
       >
-        {this.state.item.title}
+        <div className="dialog-header">
+          <IconButton
+            iconClassName="material-icons"
+            onClick={this.handleClose}
+          >
+            close
+          </IconButton>
+        </div>
+
+        <h3>{this.state.item.title}</h3>
       </Dialog>
     );
   }
