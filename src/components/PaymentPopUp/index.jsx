@@ -48,21 +48,24 @@ export default class PaymentPopUp extends Component {
     switch (stepIndex) {
       case 0:
         return (
-          <div>
-            Select your payment method: <br/> <br/>
+          <div className="popup-main">
+            Select your payment method: <br/>
             <FlatButton
+              className="popup-btn-padding"
               target="_blank"
               label="Bitcoin"
               secondary={true}
               icon={<FontIcon className="muidocs-icon-custom-github" />}
             /> <br/>
             <FlatButton
+              className="popup-btn-padding"
               target="_blank"
               label="Ethereum"
               secondary={true}
               icon={<FontIcon className="muidocs-icon-custom-github" />}
             /> <br/>
             <FlatButton
+              className="popup-btn-padding"
               target="_blank"
               label="Litecoin"
               secondary={true}
@@ -101,19 +104,6 @@ export default class PaymentPopUp extends Component {
 
         {this.getStepContent(stepIndex)}
 
-        <div className="popup-btn" style={{marginTop: 24, marginBottom: 12}}>
-          <FlatButton
-            label="Back"
-            onClick={this.handlePrev}
-            style={{marginRight: 12}}
-          />
-          <RaisedButton
-            label={stepIndex === 2 ? 'Finish' : 'Next'}
-            primary={true}
-            onClick={this.handleNext}
-          />
-        </div>
-
         <div className="popup-stepper">
           <Stepper activeStep={stepIndex} connector={<ArrowForwardIcon />}>
             <Step>
@@ -126,6 +116,21 @@ export default class PaymentPopUp extends Component {
 
           </Stepper>
         </div>
+
+        <div className="popup-btn">
+          <FlatButton
+            label={stepIndex === 0 ? 'Cancel' : 'Back'}
+            onClick={this.handlePrev}
+            style={{marginRight: 12}}
+          />
+          <RaisedButton
+            label={stepIndex === 2 ? 'Finish' : 'Next'}
+            primary={true}
+            onClick={this.handleNext}
+          />
+        </div>
+
+
 
 
       </Dialog>
