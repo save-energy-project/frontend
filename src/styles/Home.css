@@ -1,3 +1,5 @@
 .search-bar {
-  margin-right: 1050px;
+  position: fixed;
+  left: 0;
+  margin-left: 100px;
 }
