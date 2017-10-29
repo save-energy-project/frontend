@@ -101,7 +101,7 @@ export default class ProjectPopUp extends Component {
 
         <h2 style={{ display: 'inline-block', padding: '8px' }}>{item.title}</h2>
         <RaisedButton
-          label="Donate"
+          label="Invest"
           primary={true}
           onClick={this.handleDonateClick}
         />
@@ -127,7 +127,7 @@ export default class ProjectPopUp extends Component {
         <br/>
         <br/>
         <RaisedButton
-          label="Donate"
+          label="Invest"
           fullWidth={true}
           primary={true}
           onClick={this.handleDonateClick}
