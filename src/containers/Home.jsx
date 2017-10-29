@@ -16,15 +16,6 @@ class Home extends Component {
       <div>
         <Header />
         <Grid />
-        <RaisedButton
-          label="CLICK HERE SIMRAN"
-          onClick={() => {
-            this.setState({ dialog: true });
-          }}
-        />
-        <PaymentPopUp
-          dialog={this.state.dialog}
-        />
       </div>
     )
   }

@@ -12,8 +12,6 @@ import {
 } from 'material-ui/Stepper';
 import ArrowForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 
-import './popup.css';
-
 export default class PaymentPopUp extends Component {
 
   constructor (props) {
@@ -21,7 +19,7 @@ export default class PaymentPopUp extends Component {
     this.state = {
       dialog: this.props.dialog,
       stepIndex: 0,
-      price: "", 
+      price: "",
       currency: "",
       amount: ""
     }
@@ -75,7 +73,7 @@ export default class PaymentPopUp extends Component {
         );
         return (
           <div className="popup-main">
-            Select your payment method: <br/> 
+            Select your payment method: <br/>
             <div className="popup-btns">
               <FlatButton
                 target="_blank"
@@ -110,19 +108,20 @@ export default class PaymentPopUp extends Component {
         return (
           <div>
 
-            Select your amount in crypto or USD: <br/> <br/>
+            Select your amount in crypto to convert to USD: <br/> <br/>
 
             <TextField
               floatingLabelText=""
-              hintText={this.state.amount === "" ? "Insert Amount Here" : ""} 
-              value={this.state.ammount} 
+              hintText={this.state.amount === "" ? "Insert Amount Here" : ""}
+              value={this.state.ammount}
               onChange={this.handleAmountChange.bind(this)}
+              style={{ display: 'inline-block' }}
             />
-            {" " + this.state.currency}
-            <br/>
-            {"or"}
-            <br/>
-            {currencyConverter[this.state.currency]*this.state.amount + " USD"}
+            <div style={{ display: 'inline-block' }}>
+              {" " + this.state.currency}
+              {"→ "}
+              {currencyConverter[this.state.currency]*this.state.amount + " USD"}
+            </div>
           </div>
         );
 
@@ -145,7 +144,7 @@ export default class PaymentPopUp extends Component {
     return (
       <Dialog
         open={this.state.dialog}
-      >          
+      >
         {this.getStepContent(stepIndex)} <br/>
         <div className="popup-stepper">
           <Stepper activeStep={stepIndex} connector={<ArrowForwardIcon />}>
@@ -164,7 +163,7 @@ export default class PaymentPopUp extends Component {
             onClick={this.handlePrev}
             style={{marginRight: 12}}
           />
-          {stepIndex === 1 ?           
+          {stepIndex === 1 ?
             <RaisedButton
             label={'Pay'}
             primary={true}
