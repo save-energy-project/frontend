@@ -24,7 +24,7 @@ export default class Login extends Component {
     this.state = {
       dialog: this.props.dialog,
       stepIndex: 0,
-      price: "", 
+      price: "",
       currency: "",
       amount: ""
     }
@@ -35,7 +35,7 @@ export default class Login extends Component {
   }
 
   handleClick() {
-
+    window.location = '/home';
   }
 
   render () {
@@ -46,12 +46,12 @@ export default class Login extends Component {
           <TextField
             hintText=""
             floatingLabelText="Username"
-          /><br /> 
+          /><br />
           <TextField
             hintText=""
             floatingLabelText="Password"
             type="password"
-          /><br /> <br /> 
+          /><br /> <br />
           <RaisedButton label="Sign in" primary={true} onClick={this.handleClick.bind(this)}/>
         </div>
       </Card>
