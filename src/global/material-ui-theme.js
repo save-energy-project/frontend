@@ -3,8 +3,8 @@ import {
   green800,
   grey600,
   white,
-  greenA200,
-  greenA100,
+  green100,
+  green300,
   grey400,
   green200,
   darkBlack,
@@ -14,7 +14,6 @@ import {
 import { fade } from 'material-ui/utils/colorManipulator';
 import { spacing, getMuiTheme } from 'material-ui/styles';
 
-// greenA200 is the pink accent
 const rawBaseTheme = {
   ...spacing,
   fontFamily: 'Roboto, sans-serif',
@@ -22,9 +21,9 @@ const rawBaseTheme = {
     primary1Color: green800,
     primary2Color: green600,
     primary3Color: grey600,
-    accent1Color: greenA200,
-    accent2Color: greenA100,
-    accent3Color: green200,
+    accent1Color: green300,
+    accent2Color: green200,
+    accent3Color: green100,
     textColor: darkBlack,
     alternateTextColor: white,
     canvasColor: white,
