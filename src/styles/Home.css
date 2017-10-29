@@ -9,3 +9,14 @@
   top:0;
   right:0;
 }
+
+.slider {
+  width: 50%;
+  margin: 0 auto;
+  background-color: green;
+}
+
+.progress {
+  display: table;
+  margin: 0 auto;
+}

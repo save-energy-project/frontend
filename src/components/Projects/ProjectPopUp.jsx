@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
+import LinearProgress from 'material-ui/LinearProgress';
+import ImageGallery from 'react-image-gallery';
+
+import "react-image-gallery/styles/css/image-gallery.css";
 
 export default class ProjectPopUp extends Component {
   constructor (props) {
@@ -22,7 +26,37 @@ export default class ProjectPopUp extends Component {
   }
 
   createCarousel = () => {
-    
+    const { item } = this.state;
+    const { pictures } = item;
+
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1
+    };
+    let i;
+    const images = [];
+    if (pictures) {
+      for( i = 0; i < pictures.length; i++){
+        images.push({
+          original: pictures[i],
+          thumbnail: pictures[i],
+        })
+      }
+    }
+    if (pictures && pictures.length > 0) {
+      return (
+        <ImageGallery
+          items={images}
+          slideInterval={2000}
+          onImageLoad={this.handleImageLoad}
+        />
+      );
+    } else {
+      return null;
+    }
   }
 
   render () {
@@ -39,9 +73,12 @@ export default class ProjectPopUp extends Component {
         onClick={this.handleClose}
       />,
     ];
+
+    const { item, dialog } = this.state;
     return (
       <Dialog
-        open={this.state.dialog}
+        open={dialog}
+        autoScrollBodyContent={true}
         onRequestClose={() => {
           this.setState({ dialog: false, })
         }}
@@ -55,7 +92,29 @@ export default class ProjectPopUp extends Component {
           </IconButton>
         </div>
 
-        <h3>{this.state.item.title}</h3>
+        <h2>{item.title}</h2>
+        <p>{item.description}</p>
+        <div className="progress">
+          <div style={{ display: 'inline-block', paddingRight: '8px' }}> {item.current} </div>
+          <LinearProgress
+            mode="determinate"
+            value={parseInt(item.current)}
+            max={parseInt(item.goal)}
+            color='#6dbc4d'
+            style={{
+              width: '500px',
+              height: '10px',
+              display: 'inline-block',
+            }}
+          />
+          <div style={{ display: 'inline-block', paddingLeft: '8px' }}> {item.goal} </div>
+        </div>
+        <br/>
+
+        <br />
+        {this.createCarousel()}
+        <br/>
+        <br/>
       </Dialog>
     );
   }
