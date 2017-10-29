@@ -4,6 +4,7 @@ import Grid from './../components/Home/Grid';
 import RaisedButton from 'material-ui/RaisedButton';
 import PaymentPopUp from './../components/PaymentPopUp';
 
+
 class Home extends Component {
   constructor (props) {
     super(props);
@@ -16,15 +17,6 @@ class Home extends Component {
       <div>
         <Header />
         <Grid />
-        <RaisedButton
-          label="CLICK HERE SIMRAN"
-          onClick={() => {
-            this.setState({ dialog: true });
-          }}
-        />
-        <PaymentPopUp
-          dialog={this.state.dialog}
-        />
       </div>
     )
   }

@@ -146,32 +146,7 @@ export default class PaymentPopUp extends Component {
       <Dialog
         open={this.state.dialog}
       >          
-        {this.getStepContent(stepIndex)} <br/>
-        <div className="popup-stepper">
-          <Stepper activeStep={stepIndex} connector={<ArrowForwardIcon />}>
-            <Step>
-              <StepLabel>Payment Method</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Finalize</StepLabel>
-            </Step>
-          </Stepper>
-        </div>
-
-        <div className="popup-btn">
-          <FlatButton
-            label={stepIndex === 0 ? 'Cancel' : 'Back'}
-            onClick={this.handlePrev}
-            style={{marginRight: 12}}
-          />
-          {stepIndex === 1 ?           
-            <RaisedButton
-            label={'Pay'}
-            primary={true}
-            onClick={this.handleNext.bind(this, "Finish")}
-            /> : null
-          }
-        </div>
+        {"testing"}
       </Dialog>
     );
   }
